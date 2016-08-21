@@ -1,0 +1,134 @@
+package me.rayhon27.main;
+
+import java.util.logging.Logger;
+
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+import org.bukkit.Material;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandSender;
+import org.bukkit.enchantments.Enchantment;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.PlayerInventory;
+import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.plugin.java.JavaPlugin;
+
+public class main extends JavaPlugin{
+	
+	Logger myPluginLogger = Bukkit.getLogger();
+	@Override
+	public void onEnable(){
+	myPluginLogger.info("Plugin is starting up!");
+
+	}
+	@Override
+	public void onDisable(){
+	myPluginLogger.info("Plugin is shutting down!");
+	}
+	
+	public ItemStack tazer = new ItemStack(Material.BOW);{
+		ItemMeta tim = tazer.getItemMeta();
+		tim.setDisplayName(ChatColor.YELLOW + "Tazer");
+		tazer.setItemMeta(tim);
+		tazer.addEnchantment(Enchantment.ARROW_DAMAGE, 3);
+		tazer.addEnchantment(Enchantment.ARROW_INFINITE, 1);
+	}
+	public ItemStack tazercharge = new ItemStack(Material.ARROW, 64);{
+		ItemMeta aim = tazercharge.getItemMeta();
+		aim.setDisplayName(ChatColor.DARK_GRAY + "Tazer Charge");
+		tazercharge.setItemMeta(aim);
+	}
+	public ItemStack baton = new ItemStack(Material.DIAMOND_SWORD);{
+		ItemMeta bim = baton.getItemMeta();
+		bim.setDisplayName(ChatColor.RED + "Baton");
+		baton.setItemMeta(bim);
+		baton.addEnchantment(Enchantment.DAMAGE_ALL, 4);
+		baton.addEnchantment(Enchantment.FIRE_ASPECT, 2);
+	}
+	public ItemStack hat = new ItemStack(Material.CHAINMAIL_HELMET);{
+		ItemMeta him = hat.getItemMeta();
+		him.setDisplayName(ChatColor.BLUE + "Guard Hat");
+		hat.setItemMeta(him);
+		hat.addUnsafeEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 10);
+		hat.addEnchantment(Enchantment.DURABILITY, 3);
+	}
+	public ItemStack shirt = new ItemStack(Material.CHAINMAIL_CHESTPLATE);{
+		ItemMeta rim = shirt.getItemMeta();
+		rim.setDisplayName(ChatColor.BLUE + "Guard Shirt");
+		shirt.setItemMeta(rim);
+		shirt.addUnsafeEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 10);
+		shirt.addEnchantment(Enchantment.DURABILITY, 3);
+	}
+	public ItemStack pants = new ItemStack(Material.CHAINMAIL_LEGGINGS);{
+		ItemMeta pim = pants.getItemMeta();
+		pim.setDisplayName(ChatColor.BLUE + "Guard Hat");
+		pants.setItemMeta(pim);
+		pants.addUnsafeEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 10);
+		pants.addEnchantment(Enchantment.DURABILITY, 3);
+	}
+	public ItemStack shoes = new ItemStack(Material.CHAINMAIL_BOOTS);{
+		ItemMeta oim = shoes.getItemMeta();
+		oim.setDisplayName(ChatColor.BLUE + "Guard Hat");
+		shoes.setItemMeta(oim);
+		shoes.addUnsafeEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 10);
+		shoes.addEnchantment(Enchantment.DURABILITY, 3);
+	}
+	public ItemStack healthpack = new ItemStack(Material.GOLDEN_APPLE, 20);{
+		ItemMeta gim = hat.getItemMeta();
+		gim.setDisplayName(ChatColor.RED + "Health Pack");
+		healthpack.setItemMeta(gim);
+	}
+	public ItemStack food = new ItemStack(Material.COOKED_BEEF, 32);{
+		ItemMeta cim = food.getItemMeta();
+		cim.setDisplayName(ChatColor.BLUE + "Snacks");
+		food.setItemMeta(cim);
+	}
+	
+	
+	
+	
+	
+	public boolean onCommand(CommandSender Sender, Command cmd, String commandLabel, String[] args){
+		 
+        if(Sender instanceof Player){
+            Player player = (Player) Sender;
+            
+            if(commandLabel.equalsIgnoreCase("guard")){
+            	player.sendMessage(ChatColor.BLUE + "You have entered Guard mode! To exit type /guardoff!");
+            	PlayerInventory pi = player.getInventory();
+            	pi.setItem(0, tazer);
+            	pi.setItem(1, tazercharge);
+            	pi.setItem(2, baton);
+            	pi.setItem(3, hat);
+            	pi.setItem(4, shirt);
+            	pi.setItem(5, pants);
+            	pi.setItem(6, shoes);
+            	pi.setItem(7, healthpack);
+            	pi.setItem(8, food);
+            
+            }	
+            if(commandLabel.equalsIgnoreCase("guardoff")){
+            	player.sendMessage(ChatColor.GRAY + "You have gone off duty, you can now participate in all normal activities!");
+            		player.getInventory().remove(tazer);
+            		player.getInventory().remove(tazercharge);
+            		player.getInventory().remove(baton);
+            		player.getInventory().remove(hat);
+            		player.getInventory().remove(shirt);
+            		player.getInventory().remove(pants);
+            		player.getInventory().remove(shoes);
+            		player.getInventory().remove(healthpack);
+            		player.getInventory().remove(food);
+            	}
+            	
+           
+            	
+            }
+		return false;    
+	}
+	
+	
+	
+	
+	
+}
